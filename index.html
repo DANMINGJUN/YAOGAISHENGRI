@@ -1,0 +1,234 @@
+﻿<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>吴悦Happy Birthday</title>
+  <link rel="icon" href="./10B711C5.png" type="image/png">
+
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+
+  <link type="text/css" href="css/style.css" rel="stylesheet" />
+  <link rel="stylesheet" href="./HTML5 Canvas千纸鹤动画特效/css/style.css">
+
+  <style>
+    #KAISHI {
+      width: 350px;
+      height: 80px;
+      border: 5px #fff solid;
+      box-shadow: rgba(220, 220, 220, 0.226) 10px 10px 10px 10px;
+      left: 50%;
+      margin-left: -150px;
+      position: absolute;
+      bottom: 100px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #KAISHI h1 {
+      color: rgb(0, 0, 0);
+      margin-left: 90px;
+      margin-top: 20px
+    }
+
+    #KAISHI:hover {
+      background-color: black;
+      transition: 1s
+    }
+
+    #KAISHI:hover h1 {
+      color: #fff;
+      transition: 1s
+    }
+
+    #svgBox{
+	width:100%;
+	margin:100px auto;
+}
+.text{
+	font-size: 64px;
+	font-weight: bold;
+	text-transform: uppercase;
+	fill: none;
+	stroke-width: 2px;
+	stroke-dasharray: 90 310;
+	animation: stroke 6s infinite linear;
+}
+.text-1{
+	stroke: #3498db;
+	text-shadow: 0 0 5px #3498db;
+	animation-delay: -1.5s;
+}
+.text-2{
+	stroke: #f39c12;
+	text-shadow: 0 0 5px #f39c12;
+	animation-delay: -3s;
+}
+.text-3{
+	stroke: #e74c3c;
+	text-shadow: 0 0 5px #e74c3c;
+	animation-delay: -4.5s;
+}
+.text-4{
+	stroke: #9b59b6;
+	text-shadow: 0 0 5px #9b59b6;
+	animation-delay: -6s;
+}
+
+@keyframes stroke {
+	100% {
+		stroke-dashoffset: -400;
+	}
+}
+.svgText{
+	width:600px;
+	margin:0 auto;
+}
+.svgText h3{
+	font-size:18px;
+	color:#333;
+	line-height:2;
+}
+.svgText p{
+	font-size:16px;
+	color:#888;
+	line-height:2;
+}
+.svgText p a,.svgText p a:hover{
+	color:#01a6fc;
+	font-weight:600;
+}
+.svgText ul li{
+	font-size:16px;
+	color:#888;
+	line-height:2;
+}
+  </style>
+
+</head>
+
+<body style="background-color: pink">
+  <div id="scene">
+    <div id="emitter"></div>
+    <img src="./RZ@S[U6SR6XX46CM[@XYD6K.jpg">
+    <div id="KAISHI">
+      <h1>药gai丶丶看</h1>
+    </div>
+    <img style="float: right;" src="./RZ@S[U6SR6XX46CM[@XYD6K.jpg">
+    <img style=" left: 45%;position: absolute;margin-top: 150px;width: 180px;width: 180px;" src="./10B711C5.png">
+  </div>
+  <div style="width: 100%" id="controls">
+      <div style="display: none" id="svgBox">
+          <svg width="100%" height="100">
+            <text text-anchor="middle" x="50%" y="50%" class="text text-1">
+              祝最好的药gai生日快乐
+              希望我药天天开心
+            </text>
+            <text text-anchor="middle" x="50%" y="50%" class="text text-2">
+              祝最好的药gai生日快乐
+              希望我药天天开心
+            </text>
+            <text text-anchor="middle" x="50%" y="50%" class="text text-3">
+              祝最好的药gai生日快乐
+              希望我药天天开心
+            </text>
+            <text text-anchor="middle" x="50%" y="50%" class="text text-4">
+              祝最好的药gai生日快乐
+              希望我药天天开心
+            </text>
+          </svg>
+          <svg width="100%" height="400">
+              <text text-anchor="middle" x="50%" y="50%" class="text text-1">
+                悦姐吉祥
+              </text>
+              <text text-anchor="middle" x="50%" y="50%" class="text text-2">
+                悦姐吉祥
+              </text>
+              <text text-anchor="middle" x="50%" y="50%" class="text text-3">
+                悦姐吉祥
+              </text>
+              <text text-anchor="middle" x="50%" y="50%" class="text text-4">
+                悦姐吉祥
+              </text>
+            </svg>
+            <svg width="100%" height="300">
+                <text text-anchor="middle" x="50%" y="50%" class="text text-1">
+                  誕生日おめでとうございます
+                </text>
+                <text text-anchor="middle" x="50%" y="50%" class="text text-2">
+                  誕生日おめでとうございます
+                </text>
+                <text text-anchor="middle" x="50%" y="50%" class="text text-3">
+                  誕生日おめでとうございます
+                </text>
+                <text text-anchor="middle" x="50%" y="50%" class="text text-4">
+                  誕生日おめでとうございます
+                </text>
+              </svg>
+        </div>
+  </div>
+
+  <script type="text/javascript">
+    var $emitter = $('#emitter'),
+      emitEvery = 50, //每发射一次新粒子
+      removeAfter = 1000; //去除颗粒
+
+    function create() {
+
+      //创建粒子和随机值
+      var $particle = $('<div class="particle" />'),
+        x = Math.randMinMax(-200, 200),
+        y = Math.randMinMax(-200, 50),
+        z = Math.randMinMax(-200, 200),
+        degree = Math.randMinMax(0, 360),
+        color = 'hsla(' + Math.randMinMax(200, 320) + ', 80%, 60%, 1)';
+
+      //将粒子附加到DOM
+      $particle.css('background', color);
+      $emitter.append($particle);
+
+      //设置CSS3转换动画。如果没有超时，我们将看不到转换动画
+      window.setTimeout(function () {
+        $particle.css({
+          webkitTransform: 'translateX(' + x + 'px) translateY(' + y + 'px) translateZ(' + z + 'px) rotateX(' + degree + 'deg)',
+          opacity: 0
+        });
+      }, 50);
+
+      //移除当前粒子
+      window.setTimeout(function () {
+        $particle.remove();
+      }, removeAfter);
+
+      //创建下一个粒子
+      window.setTimeout(create, emitEvery);
+
+    }
+
+    Math.randMinMax = function (t, n, a) {
+      var r = t + Math.random() * (n - t)
+      return a && (r = Math.round(r)), r
+    }
+
+    //创建执行第一个粒子
+    create();
+
+
+    $(document).ready(function(){
+      $("#KAISHI").click(function () {
+        $("#scene").remove();//数字为毫秒 也可以设置 slow 和fast
+      })
+      $("#KAISHI").click(function () {
+        $("#svgBox").show(3000);//数字为毫秒 也可以设置 slow 和fast
+      })
+    })
+  </script>
+
+  <script src='./HTML5 Canvas千纸鹤动画特效/js/p5.min.js'></script>
+  <script src="./HTML5 Canvas千纸鹤动画特效/js/index.js"></script>
+  <script src='./jQuery css3文字翻转动画特效/js/jquery.min.js'></script>
+  <script src="./jQuery css3文字翻转动画特效/js/index.js"></script>
+
+</body>
+
+</html>
